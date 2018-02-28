@@ -38,19 +38,19 @@ public class ProjectileController : MonoBehaviour
 
             if (currentProjectileStage >= 3)
             {
-                rigidbody.AddForce(transform.forward * projectileHitForce * 4f);
+                rigidbody.AddForce(transform.up * projectileHitForce * 4f);
             }
             else if (currentProjectileStage <= 3 && currentProjectileStage >= 2)
             {
-                rigidbody.AddForce(transform.forward * (projectileHitForce * 3f));
+                rigidbody.AddForce(transform.up * (projectileHitForce * 3f));
             }
             else if (currentProjectileStage <= 2 && currentProjectileStage >= 1)
             {
-                rigidbody.AddForce(transform.forward * (projectileHitForce * 2f));
+                rigidbody.AddForce(transform.up * (projectileHitForce * 2f));
             }
             else if (currentProjectileStage <= 1)
             {
-                rigidbody.AddForce(transform.forward * (projectileHitForce));
+                rigidbody.AddForce(transform.up * (projectileHitForce));
             }
 
             //destroy the projectile
