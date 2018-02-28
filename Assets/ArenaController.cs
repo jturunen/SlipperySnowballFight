@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ArenaController : MonoBehaviour {
 
+    public CameraController cameraController;
+    
     public float resizeRate = 0.5F;
     private float nextResize = 0.0F;
     public float resizeSpeed = 0.1F;
@@ -37,6 +39,7 @@ public class ArenaController : MonoBehaviour {
         if (reducingActive)
         {
             resizePlane(resizeSpeed, resizeRate, reducedX, reducedY);
+            cameraController.moveCamera = true;
         }
 
     }
@@ -50,6 +53,10 @@ public class ArenaController : MonoBehaviour {
         } else
         {
             reducingActive = false;
+            cameraController.moveCamera = false;
+            cameraController.cameraSteps--;
+            Debug.Log(cameraController.cameraSteps);
+
         }
     }
 
