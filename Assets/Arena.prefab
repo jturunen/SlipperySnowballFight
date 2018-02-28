@@ -199,6 +199,8 @@ MonoBehaviour:
   resizeRate: 0.01
   resizeSpeed: 0.001
   sizeReduction: 0.3
+  zoomReductionZ: 0.8
+  zoomReductionY: 2.5
   minSize: 0.1
   stepRate: 10
 --- !u!114 &114305239253790810

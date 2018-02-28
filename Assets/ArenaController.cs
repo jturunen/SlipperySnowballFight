@@ -11,6 +11,9 @@ public class ArenaController : MonoBehaviour {
     public float resizeSpeed = 0.1F;
     public float sizeReduction = 0.3f;
 
+    public float zoomReductionZ = 0.8f;
+    public float zoomReductionY = 2.5f;
+
     public float minSize = 0.2F;
 
     public float stepRate = 5.0F;
@@ -19,7 +22,7 @@ public class ArenaController : MonoBehaviour {
     bool reducingActive = false;
 
     float reducedX = 0;
-    float reducedY = 0;
+    float reducedZ = 0;
     void Start()
     {
 
@@ -32,21 +35,24 @@ public class ArenaController : MonoBehaviour {
         {
             nextStep = Time.time + stepRate;
             reducedX = transform.localScale.x - sizeReduction;
-            reducedY = transform.localScale.x - sizeReduction;
+            reducedZ = transform.localScale.z - sizeReduction;
+
+            cameraController.reducedY = cameraController.transform.localPosition.y - zoomReductionY;
+            cameraController.reducedZ = cameraController.transform.localPosition.z + zoomReductionZ;
             reducingActive = true;
         }
 
         if (reducingActive)
         {
-            resizePlane(resizeSpeed, resizeRate, reducedX, reducedY);
+            resizePlane(resizeSpeed, resizeRate, reducedX, reducedZ);
             cameraController.moveCamera = true;
         }
 
     }
 
-    void resizePlane(float currentResizeSpeed, float currentResizeRate, float reducedX, float reducedY)
+    void resizePlane(float currentResizeSpeed, float currentResizeRate, float reducedX, float reducedZ)
     {
-        if (Time.time > nextResize && transform.localScale.x >= reducedX && transform.localScale.z >= reducedY && reducedX > minSize)
+        if (Time.time > nextResize && transform.localScale.x >= reducedX && transform.localScale.z >= reducedZ && reducedX > minSize)
         {
             nextResize = Time.time + currentResizeRate;
             transform.localScale -= new Vector3(currentResizeSpeed, 0, currentResizeSpeed);

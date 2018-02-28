@@ -6,15 +6,20 @@ public class CameraController : MonoBehaviour {
 
     public bool moveCamera = false;
     public int cameraSteps = 8;
-	// Use this for initialization
-	void Start () {
+
+    public float reducedY = 0;
+    public float reducedZ = 0;
+    // Use this for initialization
+    void Start () {
     }
 
     // Update is called once per frame
     void Update () {
+        
         if (moveCamera)
         {
-            if (cameraSteps == 6)
+            moveCameraMethod(new Vector3(0, reducedY, reducedZ));
+            /*if (cameraSteps == 6)
             {
                 moveCameraMethod(new Vector3(0, 15, -5f));
             }
@@ -37,7 +42,7 @@ public class CameraController : MonoBehaviour {
             if (cameraSteps == 1)
             {
                 moveCameraMethod(new Vector3(0, 2, -0.7f));
-            }
+            }*/
         }
     }
 
