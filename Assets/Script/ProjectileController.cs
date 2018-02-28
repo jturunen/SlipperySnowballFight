@@ -9,12 +9,17 @@ public class ProjectileController : MonoBehaviour
     public float projectileDamage;
 
     private Rigidbody rigidbody;
+
+    public int currentProjectileStage;
     
 
     // Use this for initialization
     void Start()
     {
-
+        for (int i = 0; i < currentProjectileStage; i++)
+        {
+            transform.localScale += new Vector3(0.5F, 0.5F, 0.5F);
+        }
     }
 
     // Update is called once per frame
@@ -30,7 +35,24 @@ public class ProjectileController : MonoBehaviour
         {
             Debug.Log("HIT!");
             rigidbody = collider.gameObject.GetComponent<Rigidbody>();
-            rigidbody.AddForce(transform.forward * projectileHitForce);
+
+            if (currentProjectileStage >= 3)
+            {
+                rigidbody.AddForce(transform.forward * projectileHitForce * 4f);
+            }
+            else if (currentProjectileStage <= 3 && currentProjectileStage >= 2)
+            {
+                rigidbody.AddForce(transform.forward * (projectileHitForce * 3f));
+            }
+            else if (currentProjectileStage <= 2 && currentProjectileStage >= 1)
+            {
+                rigidbody.AddForce(transform.forward * (projectileHitForce * 2f));
+            }
+            else if (currentProjectileStage <= 1)
+            {
+                rigidbody.AddForce(transform.forward * (projectileHitForce));
+            }
+
             //destroy the projectile
             Destroy(gameObject);
         }

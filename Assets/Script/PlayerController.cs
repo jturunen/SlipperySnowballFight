@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour {
     public Transform projectileSpawn;
 
     public float projectileVelocity;
+    
+    private int currentChargingState = -1;
+    public float chargingTime;
+    public float nextChargingTime;
 
     AudioSource audio;
     public AudioClip audioClipProjectile;
@@ -17,13 +21,33 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         audio = gameObject.AddComponent<AudioSource>();
+        nextChargingTime = chargingTime;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (Time.time > nextChargingTime)
+            {
+                nextChargingTime += chargingTime;
+
+                if (currentChargingState >= 4)
+                {
+                    currentChargingState = 4;
+                } else
+                {
+                    currentChargingState += 1;
+                }
+                Debug.Log("STATE: " + currentChargingState);
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             Fire();
+            currentChargingState = -1;
         }
     }
 
@@ -36,6 +60,7 @@ public class PlayerController : MonoBehaviour {
             projectilePrefab,
             projectileSpawn.position,
             projectileSpawn.rotation);
+        projectile.GetComponent<ProjectileController>().currentProjectileStage = currentChargingState;
 
         // Add velocity to the bullet
         projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileVelocity;
