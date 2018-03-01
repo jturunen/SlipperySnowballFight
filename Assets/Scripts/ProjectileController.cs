@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
+    new AudioSource audio;
+    public AudioClip audioClipProjectileHit;
 
     public float projectileHitForce;
     public float projectileDamage;
@@ -16,6 +18,8 @@ public class ProjectileController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+
         for (int i = 0; i < currentProjectileStage; i++)
         {
             transform.localScale += new Vector3(0.5F, 0.5F, 0.5F);
@@ -30,10 +34,12 @@ public class ProjectileController : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        audio = gameObject.AddComponent<AudioSource>();
         //all projectile colliding game objects should be tagged "Player" or whatever in inspector but that tag must be reflected in the below if conditional
         if (collider.gameObject.tag == "Player")
         {
             Debug.Log("HIT!");
+            audio.PlayOneShot(audioClipProjectileHit);
             rigidbody = collider.gameObject.GetComponent<Rigidbody>();
 
             if (currentProjectileStage >= 3)
