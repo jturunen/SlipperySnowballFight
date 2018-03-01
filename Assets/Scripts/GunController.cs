@@ -14,7 +14,7 @@ public class GunController : MonoBehaviour {
 
     public Transform projectileSpawn;
 
-    AudioSource audio;
+    new AudioSource audio;
     public AudioClip audioClipProjectile;
 
     // Use this for initialization

@@ -10,8 +10,9 @@ public class PlayerController : MonoBehaviour {
     private int currentChargingState = -1;
     public float chargingTime;
     public float nextChargingTime;
-
+    
     public float moveSpeed;
+    public float slipfactor;
     private Rigidbody myRigidBody;
 
     private Vector3 moveInput;
@@ -117,6 +118,7 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        myRigidBody.velocity = moveVelocity;
+        myRigidBody.velocity += moveVelocity / slipfactor;
+        
     }
 }
