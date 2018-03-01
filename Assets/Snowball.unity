@@ -131,7 +131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &494031787
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -262,6 +262,21 @@ Prefab:
     - target: {fileID: 1950676157629718, guid: fbb9d3d59bfb4fd4aad91634c50547d4, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54634926774958566, guid: fbb9d3d59bfb4fd4aad91634c50547d4,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114458994197953564, guid: fbb9d3d59bfb4fd4aad91634c50547d4,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 54634926774958566, guid: fbb9d3d59bfb4fd4aad91634c50547d4,
+        type: 2}
+      propertyPath: m_AngularDrag
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbb9d3d59bfb4fd4aad91634c50547d4, type: 2}
@@ -431,7 +446,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &1588418468
 MeshRenderer:
@@ -473,7 +488,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1588418467}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f6031675eecad874da9c898962c28338, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
