@@ -26,11 +26,16 @@ public class PlayerController : MonoBehaviour {
 
     private Camera mainCamera;
 
-    public SpriteRenderer reindeerSprite;
+    public SpriteRenderer playerSprite;
+    Animator animator;
+    public Quaternion reindeerRotation;
 
     public GunController theGun;
 
     public bool useController;
+
+    private bool facingRight = false;
+    private bool playerAiming = false;
 
     // Use this for initialization
     void Start () {
@@ -43,6 +48,8 @@ public class PlayerController : MonoBehaviour {
 
         myRigidBody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
+
+        animator = playerSprite.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -50,25 +57,66 @@ public class PlayerController : MonoBehaviour {
 
         moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
 
-        if(moveInput.x < 1 && moveInput.x > 0.7f)
+        if (moveInput.x > 0 && !facingRight)
         {
-            Debug.Log("Up");
-        } else if(moveInput.x < 0.6f && moveInput.x > 0.3f)
-        {
-            Debug.Log("LeftUp");
-        } else if (moveInput.x < 0.2f && moveInput.x > -0.2f)
-        {
-            Debug.Log("Left");
+            Flip();
         }
-        else if (moveInput.x < -0.3f && moveInput.x > -0.6f)
+        else if (moveInput.x < 0 && facingRight)
         {
-            Debug.Log("LeftDown");
-        } else if (moveInput.x < -0.7f && moveInput.x > -1f)
-        {
-            Debug.Log("Down");
+            Flip();
         }
 
+        if (moveInput.x < 0 && moveInput.z > 0)
+        {
+            animator.ResetTrigger("WalkLeftUp");
+            animator.SetTrigger("WalkLeftUp");
+        }
+        if (moveInput.x == -1 && moveInput.z == 0)
+        {
 
+            animator.ResetTrigger("WalkLeft");
+            animator.SetTrigger("WalkLeft");
+        }
+        if (moveInput.x < 0 && moveInput.z < 0)
+        {
+            Flip();
+
+            animator.ResetTrigger("WalkRightDown");
+            animator.SetTrigger("WalkRightDown");
+        }
+        if (moveInput.x == 0 && moveInput.z == -1)
+        {
+
+            animator.ResetTrigger("WalkUp");
+            animator.SetTrigger("WalkDown");
+        }
+        if (moveInput.x > 0 && moveInput.z < 0)
+        {
+            Flip();
+
+            animator.ResetTrigger("WalkRightDown");
+            animator.SetTrigger("WalkRightDown");
+        }
+        if (moveInput.x == 1 && moveInput.z == 0)
+        {
+
+            animator.ResetTrigger("WalkLeft");
+            animator.SetTrigger("WalkLeft");
+        }
+        if (moveInput.x > 0 && moveInput.z > 0)
+        {
+
+            animator.ResetTrigger("WalkLeftUp");
+            animator.SetTrigger("WalkLeftUp");
+        }
+        if (moveInput.x == 0 && moveInput.z == 1)
+        {
+
+            animator.ResetTrigger("WalkDown");
+            animator.SetTrigger("WalkUp");
+        }
+
+        
         moveVelocity = moveInput * moveSpeed;
 
         //Rotate with mouse
@@ -106,6 +154,7 @@ public class PlayerController : MonoBehaviour {
             }
             if (Input.GetMouseButtonUp(0))
             {
+
                 theGun.Fire(currentChargingState);
 
                 currentChargingState = -1;
@@ -120,6 +169,7 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             }
+
 
             if (Input.GetKey(KeyCode.Joystick1Button5))
             {
@@ -140,6 +190,7 @@ public class PlayerController : MonoBehaviour {
             }
             if (Input.GetKeyUp(KeyCode.Joystick1Button5))
             {
+
                 theGun.Fire(currentChargingState);
 
                 currentChargingState = -1;
@@ -158,9 +209,24 @@ public class PlayerController : MonoBehaviour {
         _slider.value = _hp;
     }
 
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
+    void FlipAim()
+    {
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
     private void LateUpdate()
     {
-        reindeerSprite.transform.rotation = initRot;
+        playerSprite.transform.rotation = initRot;
     }
 
     private void FixedUpdate()
