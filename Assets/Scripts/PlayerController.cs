@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 
 public class PlayerController : MonoBehaviour {
+
+    Slider _slider = null;
+    float _hp = 1.0f;
+    public bool _isOutOfArena = false;
 
     public float projectileVelocity;
     
@@ -27,6 +33,9 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         nextChargingTime = chargingTime;
+
+        //Change player1HP name with the slider names
+        _slider = GameObject.Find("player1HP").GetComponent<Slider>();
 
         myRigidBody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
@@ -77,7 +86,6 @@ public class PlayerController : MonoBehaviour {
 
                 currentChargingState = -1;
             }
-
         }
 
         //Rotate with Controller
@@ -114,6 +122,16 @@ public class PlayerController : MonoBehaviour {
             }
 
         }
+
+        if (_isOutOfArena)
+        {
+            _hp -= 0.01f;
+            if (_hp < 0)
+            {
+                _hp = 0;
+            }
+        }
+        _slider.value = _hp;
     }
 
     private void FixedUpdate()
