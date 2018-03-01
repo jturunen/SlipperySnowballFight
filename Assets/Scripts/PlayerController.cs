@@ -105,9 +105,48 @@ public class PlayerController : MonoBehaviour {
 
             reindeerRotation.eulerAngles = transform.rotation.eulerAngles;
 
-            Debug.Log(reindeerRotation.eulerAngles);
+            if (reindeerRotation.eulerAngles.y >= 0 && reindeerRotation.eulerAngles.y < 30)
+            {
+                Debug.Log("UP");
             
-            
+            }
+            else if (reindeerRotation.eulerAngles.y > 30 && reindeerRotation.eulerAngles.y < 60)
+            {
+                Debug.Log("UP-RIGHT");
+
+            }
+            else if (reindeerRotation.eulerAngles.y > 60 && reindeerRotation.eulerAngles.y < 120)
+            {
+                Debug.Log("RIGHT");
+
+            }
+            else if (reindeerRotation.eulerAngles.y > 120 && reindeerRotation.eulerAngles.y < 150)
+            {
+                Debug.Log("DOWN-RIGHT");
+
+            }
+            else if (reindeerRotation.eulerAngles.y > 150 && reindeerRotation.eulerAngles.y < 210)
+            {
+                Debug.Log("DOWN");
+
+            }
+            else if (reindeerRotation.eulerAngles.y > 210 && reindeerRotation.eulerAngles.y < 240)
+            {
+                Debug.Log("DOWN-LEFT");
+
+            }
+            else if (reindeerRotation.eulerAngles.y > 240 && reindeerRotation.eulerAngles.y < 300)
+            {
+                Debug.Log("LEFT");
+
+            }
+            else if (reindeerRotation.eulerAngles.y > 300 && reindeerRotation.eulerAngles.y < 360)
+            {
+                Debug.Log("UP-LEFT");
+
+            }
+
+
 
             if (Input.GetKey(KeyCode.Joystick1Button5))
             {
