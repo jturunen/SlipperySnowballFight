@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
-public class PlayerController : MonoBehaviour {
+public class Player2Controller : MonoBehaviour
+{
 
     Slider _slider = null;
     float _hp = 1.0f;
     public bool _isOutOfArena = false;
 
     public float projectileVelocity;
-    
+
     private int currentChargingState = -1;
     public float chargingTime;
     public float nextChargingTime;
-    
+
     public float moveSpeed;
     public float slipfactor;
     private Rigidbody myRigidBody;
@@ -31,20 +31,22 @@ public class PlayerController : MonoBehaviour {
     public bool useController;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         nextChargingTime = chargingTime;
 
         //Change player1HP name with the slider names
-        _slider = GameObject.Find("player1HP").GetComponent<Slider>();
+        _slider = GameObject.Find("player2HP").GetComponent<Slider>();
 
         myRigidBody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-        moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+    // Update is called once per frame
+    void Update()
+    {
+
+        moveInput = new Vector3(Input.GetAxisRaw("P2_Horizontal"), 0f, Input.GetAxisRaw("P2_Vertical"));
         moveVelocity = moveInput * moveSpeed;
 
         //Rotate with mouse
@@ -86,19 +88,20 @@ public class PlayerController : MonoBehaviour {
 
                 currentChargingState = -1;
             }
+
         }
 
         //Rotate with Controller
         if (useController)
         {
-            Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal") + Vector3.forward * -Input.GetAxisRaw("RVertical");
+            Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("P2_RHorizontal") + Vector3.forward * -Input.GetAxisRaw("P2_RVertical");
             if (playerDirection.sqrMagnitude > 0.0f)
             {
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             }
 
-            if (Input.GetKey(KeyCode.Joystick1Button5))
-            {
+            if (Input.GetButtonDown("P2_Fire1"))
+                {
                 if (Time.time > nextChargingTime)
                 {
                     nextChargingTime += chargingTime;
@@ -114,7 +117,7 @@ public class PlayerController : MonoBehaviour {
                     Debug.Log("STATE: " + currentChargingState);
                 }
             }
-            if (Input.GetKeyUp(KeyCode.Joystick1Button5))
+            if (Input.GetButtonUp("P2_Fire1"))
             {
                 theGun.Fire(currentChargingState);
 
@@ -138,7 +141,7 @@ public class PlayerController : MonoBehaviour {
     private void FixedUpdate()
     {
         myRigidBody.velocity += moveVelocity / slipfactor;
-        
+
     }
 
     private void RemovePlayer()
