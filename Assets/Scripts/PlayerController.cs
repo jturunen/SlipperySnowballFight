@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     private Camera mainCamera;
 
     public SpriteRenderer reindeerSprite;
+    public Quaternion reindeerRotation;
 
     public GunController theGun;
 
@@ -49,25 +50,6 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
         moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-
-        if(moveInput.x < 1 && moveInput.x > 0.7f)
-        {
-            Debug.Log("Up");
-        } else if(moveInput.x < 0.6f && moveInput.x > 0.3f)
-        {
-            Debug.Log("LeftUp");
-        } else if (moveInput.x < 0.2f && moveInput.x > -0.2f)
-        {
-            Debug.Log("Left");
-        }
-        else if (moveInput.x < -0.3f && moveInput.x > -0.6f)
-        {
-            Debug.Log("LeftDown");
-        } else if (moveInput.x < -0.7f && moveInput.x > -1f)
-        {
-            Debug.Log("Down");
-        }
-
 
         moveVelocity = moveInput * moveSpeed;
 
@@ -120,6 +102,12 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             }
+
+            reindeerRotation.eulerAngles = transform.rotation.eulerAngles;
+
+            Debug.Log(reindeerRotation.eulerAngles);
+            
+            
 
             if (Input.GetKey(KeyCode.Joystick1Button5))
             {
