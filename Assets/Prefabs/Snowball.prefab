@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6651319569378947bde6f217b916827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileHitForce: 75
+  projectileHitForce: 150
   projectileDamage: 10
   currentProjectileStage: 0
 --- !u!135 &135421660176485362
