@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
+    public Transform target;
+
     public bool moveCamera = false;
 
     public float reducedY = 0;
@@ -16,10 +18,10 @@ public class CameraController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
+        transform.LookAt(target);
         if (moveCamera)
         {
-            moveCameraMethod(new Vector3(0, reducedY, reducedZ));         
+           // moveCameraMethod(new Vector3(0, reducedY, reducedZ));         
         }
     }
 

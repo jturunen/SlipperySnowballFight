@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour {
-
+    Quaternion initRot;
+ 
     Slider _slider = null;
     float _hp = 1.0f;
     public bool _isOutOfArena = false;
@@ -25,12 +26,16 @@ public class PlayerController : MonoBehaviour {
 
     private Camera mainCamera;
 
+    public SpriteRenderer reindeerSprite;
+
     public GunController theGun;
 
     public bool useController;
 
     // Use this for initialization
     void Start () {
+        initRot = transform.rotation;
+
         nextChargingTime = chargingTime;
 
         //Change player1HP name with the slider names
@@ -44,6 +49,26 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
         moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+
+        if(moveInput.x < 1 && moveInput.x > 0.7f)
+        {
+            Debug.Log("Up");
+        } else if(moveInput.x < 0.6f && moveInput.x > 0.3f)
+        {
+            Debug.Log("LeftUp");
+        } else if (moveInput.x < 0.2f && moveInput.x > -0.2f)
+        {
+            Debug.Log("Left");
+        }
+        else if (moveInput.x < -0.3f && moveInput.x > -0.6f)
+        {
+            Debug.Log("LeftDown");
+        } else if (moveInput.x < -0.7f && moveInput.x > -1f)
+        {
+            Debug.Log("Down");
+        }
+
+
         moveVelocity = moveInput * moveSpeed;
 
         //Rotate with mouse
@@ -131,6 +156,11 @@ public class PlayerController : MonoBehaviour {
             }
         }
         _slider.value = _hp;
+    }
+
+    private void LateUpdate()
+    {
+        reindeerSprite.transform.rotation = initRot;
     }
 
     private void FixedUpdate()
