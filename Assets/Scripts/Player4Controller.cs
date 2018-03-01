@@ -48,7 +48,6 @@ public class Player4Controller : MonoBehaviour
 
         moveInput = new Vector3(Input.GetAxisRaw("P4_Horizontal"), 0f, Input.GetAxisRaw("P4_Vertical"));
         moveVelocity = moveInput * moveSpeed;
-        print(moveInput);
 
         //Rotate with mouse
         if (!useController)
@@ -80,7 +79,7 @@ public class Player4Controller : MonoBehaviour
                     {
                         currentChargingState += 1;
                     }
-                    Debug.Log("STATE: " + currentChargingState);
+                    Debug.Log("Player 4 charge: " + currentChargingState);
                 }
             }
             if (Input.GetMouseButtonUp(0))
@@ -101,7 +100,7 @@ public class Player4Controller : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             }
 
-            if (Input.GetButtonDown("P4_Fire1"))
+            if (Input.GetButton("P4_Fire1"))
             {
                 if (Time.time > nextChargingTime)
                 {
@@ -115,7 +114,7 @@ public class Player4Controller : MonoBehaviour
                     {
                         currentChargingState += 1;
                     }
-                    Debug.Log("STATE: " + currentChargingState);
+                    Debug.Log("Player 4 charge: " + currentChargingState);
                 }
             }
             if (Input.GetButtonUp("P4_Fire1"))

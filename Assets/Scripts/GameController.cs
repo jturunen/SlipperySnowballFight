@@ -34,10 +34,13 @@ public class GameController : MonoBehaviour {
         {
             GameObject.Find("Player 3").SetActive(false);
             GameObject.Find("Player 4").SetActive(false);
+            GameObject.Find("HealthHolder3").SetActive(false);
+            GameObject.Find("HealthHolder4").SetActive(false);
         }
         else if (PlayerPrefs.GetInt("PlayerAmount") == 3)
         {
             GameObject.Find("Player 4").SetActive(false);
+            GameObject.Find("HealthHolder4").SetActive(false);
         }
 
         Debug.Log("Level Loaded with " + PlayerPrefs.GetInt("PlayerAmount") + " players");

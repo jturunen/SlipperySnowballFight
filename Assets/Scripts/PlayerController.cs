@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour {
                     {
                         currentChargingState += 1;
                     }
-                    Debug.Log("STATE: " + currentChargingState);
+                    Debug.Log("Player 1 charge: " + currentChargingState);
                 }
             }
             if (Input.GetKeyUp(KeyCode.Joystick1Button5))
