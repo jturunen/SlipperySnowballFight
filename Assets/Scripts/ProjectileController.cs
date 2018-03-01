@@ -8,7 +8,7 @@ public class ProjectileController : MonoBehaviour
     public float projectileHitForce;
     public float projectileDamage;
 
-    private Rigidbody rigidbody;
+    private new Rigidbody rigidbody;
 
     public int currentProjectileStage;
     
