@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
 
     public GameObject[] playersLeft;
     public GameObject canvasGameEnd;
+    public GameObject canvasGame;
 
     public Text textPlayerWon;
 
@@ -71,6 +72,7 @@ public class GameController : MonoBehaviour {
 
         gameOver = true;
         canvasGameEnd.SetActive(true);
+        canvasGame.SetActive(false);
         textPlayerWon.text = playerName + " WINS!";
     }
 
@@ -80,6 +82,7 @@ public class GameController : MonoBehaviour {
     {
         Debug.Log("Game restarted");
         canvasGameEnd.SetActive(false);
+        canvasGame.SetActive(true);
         gameOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
