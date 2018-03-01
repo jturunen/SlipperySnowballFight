@@ -17,6 +17,8 @@ public class GunController : MonoBehaviour {
     new AudioSource audio;
     public AudioClip audioClipProjectile;
 
+    public float fireRate = 0.5F;
+    private float nextFire = 0.0F;
     // Use this for initialization
     void Start () {
         audio = gameObject.AddComponent<AudioSource>();
@@ -29,19 +31,25 @@ public class GunController : MonoBehaviour {
 
     public void Fire(int currentChargingState)
     {
-        audio.PlayOneShot(audioClipProjectile);
+        if (Time.time > nextFire)
+        {
 
-        // Create the Bullet from the Bullet Prefab
-        var projectile = (GameObject)Instantiate(
-            projectilePrefab,
-            projectileSpawn.position,
-            projectileSpawn.rotation);
-        projectile.GetComponent<ProjectileController>().currentProjectileStage = currentChargingState;
+        
+            nextFire = Time.time + fireRate;
+            audio.PlayOneShot(audioClipProjectile);
 
-        // Add velocity to the bullet
-        projectile.GetComponent<Rigidbody>().velocity = projectile.transform.up * projectileVelocity;
+            // Create the Bullet from the Bullet Prefab
+            var projectile = (GameObject)Instantiate(
+                projectilePrefab,
+                projectileSpawn.position,
+                projectileSpawn.rotation);
+            projectile.GetComponent<ProjectileController>().currentProjectileStage = currentChargingState;
 
-        // Destroy the bullet after 10 seconds
-        Destroy(projectile, 10.0f);
+            // Add velocity to the bullet
+            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.up * projectileVelocity;
+
+            // Destroy the bullet after 10 seconds
+            Destroy(projectile, 10.0f);
+        }
     }
 }

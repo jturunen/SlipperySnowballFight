@@ -152,7 +152,7 @@ public class Player3Controller : MonoBehaviour
             {
                 theGun.Fire(currentChargingState);
 
-                currentChargingState = -1;
+                currentChargingState = 0;
             }
 
         }

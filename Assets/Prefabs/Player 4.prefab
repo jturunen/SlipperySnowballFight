@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1249893329105542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4405747711720506}
@@ -303,13 +303,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866df168863d92546bfaa5c18b7a5dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hp: 3
   _isOutOfArena: 0
   projectileVelocity: 6
   playerSprite: {fileID: 212478890168661736}
   chargingTime: 0.3
   nextChargingTime: 0
   moveSpeed: 10
-  slipfactor: 20
+  slipfactor: 70
   theGun: {fileID: 114957442987731872}
   useController: 1
 --- !u!114 &114957442987731872
@@ -330,6 +331,7 @@ MonoBehaviour:
   timeBetweenShots: 0
   projectileSpawn: {fileID: 4231636770495496}
   audioClipProjectile: {fileID: 8300000, guid: c321c419d03ce354bae75b80a6b1cde3, type: 3}
+  fireRate: 0.5
 --- !u!136 &136213847933130480
 CapsuleCollider:
   m_ObjectHideFlags: 1

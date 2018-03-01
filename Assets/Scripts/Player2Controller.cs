@@ -151,7 +151,7 @@ public class Player2Controller : MonoBehaviour
             {
                 theGun.Fire(currentChargingState);
 
-                currentChargingState = -1;
+                currentChargingState = 0;
             }
 
         }
