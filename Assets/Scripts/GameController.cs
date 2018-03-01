@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
 
     public GameObject[] playersLeft;
+    public GameObject[] playersInGame;
     public GameObject canvasGameEnd;
     public GameObject canvasGame;
 
@@ -29,6 +30,16 @@ public class GameController : MonoBehaviour {
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        if (PlayerPrefs.GetInt("PlayerAmount") == 2)
+        {
+            GameObject.Find("Player 3").SetActive(false);
+            GameObject.Find("Player 4").SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt("PlayerAmount") == 3)
+        {
+            GameObject.Find("Player 4").SetActive(false);
+        }
+
         Debug.Log("Level Loaded with " + PlayerPrefs.GetInt("PlayerAmount") + " players");
         Debug.Log(scene.name);
         Debug.Log(mode);
