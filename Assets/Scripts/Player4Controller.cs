@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class Player4Controller : MonoBehaviour
 {
-
+    Quaternion initRot;
     Slider _slider = null;
-    float _hp = 1.0f;
+    public float _hp = 1.0f;
     public bool _isOutOfArena = false;
 
     public float projectileVelocity;
+    public SpriteRenderer playerSprite;
 
     private int currentChargingState = -1;
     public float chargingTime;
@@ -25,21 +26,26 @@ public class Player4Controller : MonoBehaviour
     private Vector3 moveVelocity;
 
     private Camera mainCamera;
+    Animator animator;
 
     public GunController theGun;
 
     public bool useController;
 
+    private bool facingRight = false;
     // Use this for initialization
     void Start()
     {
         nextChargingTime = chargingTime;
+        initRot = transform.rotation;
 
         //Change player1HP name with the slider names
         _slider = GameObject.Find("player4HP").GetComponent<Slider>();
 
         myRigidBody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
+        animator = playerSprite.GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -48,6 +54,65 @@ public class Player4Controller : MonoBehaviour
 
         moveInput = new Vector3(Input.GetAxisRaw("P4_Horizontal"), 0f, Input.GetAxisRaw("P4_Vertical"));
         moveVelocity = moveInput * moveSpeed;
+
+        if (moveInput.x > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (moveInput.x < 0 && facingRight)
+        {
+            Flip();
+        }
+
+        if (moveInput.x < 0 && moveInput.z > 0)
+        {
+            animator.ResetTrigger("WalkUpSide");
+            animator.SetTrigger("WalkUpSide");
+        }
+        if (moveInput.x == -1 && moveInput.z == 0)
+        {
+
+            animator.ResetTrigger("WalkLeft");
+            animator.SetTrigger("WalkLeft");
+        }
+        if (moveInput.x < 0 && moveInput.z < 0)
+        {
+            Flip();
+
+            animator.ResetTrigger("WalkDownSide");
+            animator.SetTrigger("WalkDownSide");
+        }
+        if (moveInput.x == 0 && moveInput.z == -1)
+        {
+
+            animator.ResetTrigger("WalkUp");
+            animator.SetTrigger("WalkDown");
+        }
+        if (moveInput.x > 0 && moveInput.z < 0)
+        {
+            Flip();
+
+            animator.ResetTrigger("WalkDownSide");
+            animator.SetTrigger("WalkDownSide");
+        }
+        if (moveInput.x == 1 && moveInput.z == 0)
+        {
+
+            animator.ResetTrigger("WalkLeft");
+            animator.SetTrigger("WalkLeft");
+        }
+        if (moveInput.x > 0 && moveInput.z > 0)
+        {
+
+            animator.ResetTrigger("WalkUpSide");
+            animator.SetTrigger("WalkUpSide");
+        }
+        if (moveInput.x == 0 && moveInput.z == 1)
+        {
+
+            animator.ResetTrigger("WalkDown");
+            animator.SetTrigger("WalkUp");
+        }
 
         //Rotate with mouse
         if (!useController)
@@ -143,10 +208,21 @@ public class Player4Controller : MonoBehaviour
         myRigidBody.velocity += moveVelocity / slipfactor;
 
     }
-
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
     private void RemovePlayer()
     {
         gameObject.SetActive(false);
+    }
+
+    private void LateUpdate()
+    {
+        playerSprite.transform.rotation = initRot;
     }
 }
 

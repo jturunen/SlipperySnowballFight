@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour {
 
         if (moveCamera)
         {
-            moveCameraMethod(new Vector3(0, reducedY, reducedZ));         
+           // moveCameraMethod(new Vector3(0, reducedY, reducedZ));         
         }
     }
 

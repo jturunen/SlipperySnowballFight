@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public GameObject canvasGameEnd;
     public GameObject canvasGame;
 
+
     public Text textPlayerWon;
 
     public bool gameOver;
