@@ -60,9 +60,6 @@ public class ArenaController : MonoBehaviour {
         {
             reducingActive = false;
             cameraController.moveCamera = false;
-            cameraController.cameraSteps--;
-            Debug.Log(cameraController.cameraSteps);
-
         }
     }
 
