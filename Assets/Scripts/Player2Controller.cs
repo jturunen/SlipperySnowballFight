@@ -100,7 +100,7 @@ public class Player2Controller : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             }
 
-            if (Input.GetButtonDown("P2_Fire1"))
+            if (Input.GetButton("P2_Fire1"))
                 {
                 if (Time.time > nextChargingTime)
                 {
@@ -114,7 +114,7 @@ public class Player2Controller : MonoBehaviour
                     {
                         currentChargingState += 1;
                     }
-                    Debug.Log("STATE: " + currentChargingState);
+                    Debug.Log("Player 2 charge: " + currentChargingState);
                 }
             }
             if (Input.GetButtonUp("P2_Fire1"))

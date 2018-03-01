@@ -257,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isOutOfArena: 0
   projectileVelocity: 6
-  chargingTime: 1
+  chargingTime: 0.3
   nextChargingTime: 0
   moveSpeed: 10
   slipfactor: 20

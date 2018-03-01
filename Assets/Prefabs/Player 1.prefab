@@ -113,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950676157629718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -10, y: 1, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4821724499108514}
@@ -273,13 +273,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ba3b960a49de54db3245f0e7d47917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isOutOfArena: 0
   projectileVelocity: 6
-  chargingTime: 1
+  chargingTime: 0.3
   nextChargingTime: 0
   moveSpeed: 10
   slipfactor: 20
   theGun: {fileID: 114261858210568862}
-  useController: 0
+  useController: 1
 --- !u!136 &136586370861904844
 CapsuleCollider:
   m_ObjectHideFlags: 1
