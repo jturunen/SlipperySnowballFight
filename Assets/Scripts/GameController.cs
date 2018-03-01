@@ -71,6 +71,13 @@ public class GameController : MonoBehaviour {
                 Debug.Log(playerName + " won!");
 
                 GameEnded(playerName);
+            } else if (playersLeft.Length < 1)
+            {
+                string playerName = "NOBODY";
+
+                Debug.Log(playerName + " won!");
+
+                GameEnded(playerName);
             }
         }
     }
