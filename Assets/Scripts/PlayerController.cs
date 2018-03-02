@@ -5,20 +5,22 @@ using UnityEngine.UI;
 
 
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+    Quaternion initRot;
+    public float slipfactor;
 
     Slider _slider = null;
-    float _hp = 1.0f;
+    public float _hp = 1.0f;
     public bool _isOutOfArena = false;
 
     public float projectileVelocity;
-    
-    private int currentChargingState = -1;
+
+    private int currentChargingState = 0;
     public float chargingTime;
     public float nextChargingTime;
-    
+
     public float moveSpeed;
-    public float slipfactor;
     private Rigidbody myRigidBody;
 
     private Vector3 moveInput;
@@ -26,12 +28,22 @@ public class PlayerController : MonoBehaviour {
 
     private Camera mainCamera;
 
+    public SpriteRenderer playerSprite;
+    Animator animator;
+    public Quaternion reindeerRotation;
+
     public GunController theGun;
 
     public bool useController;
 
+    private bool facingRight = false;
+    private bool playerAiming = false;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+        initRot = transform.rotation;
+
         nextChargingTime = chargingTime;
 
         //Change player1HP name with the slider names
@@ -39,12 +51,76 @@ public class PlayerController : MonoBehaviour {
 
         myRigidBody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
+
+        animator = playerSprite.GetComponent<Animator>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+
+        if (moveInput.x > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (moveInput.x < 0 && facingRight)
+        {
+            Flip();
+        }
+
+        if (moveInput.x < 0 && moveInput.z > 0)
+        {
+            animator.ResetTrigger("WalkUpSide");
+            animator.SetTrigger("WalkUpSide");
+        }
+        if (moveInput.x == -1 && moveInput.z == 0)
+        {
+
+            animator.ResetTrigger("WalkLeft");
+            animator.SetTrigger("WalkLeft");
+        }
+        if (moveInput.x < 0 && moveInput.z < 0)
+        {
+            Flip();
+
+            animator.ResetTrigger("WalkDownSide");
+            animator.SetTrigger("WalkDownSide");
+        }
+        if (moveInput.x == 0 && moveInput.z == -1)
+        {
+
+            animator.ResetTrigger("WalkUp");
+            animator.SetTrigger("WalkDown");
+        }
+        if (moveInput.x > 0 && moveInput.z < 0)
+        {
+            Flip();
+
+            animator.ResetTrigger("WalkDownSide");
+            animator.SetTrigger("WalkDownSide");
+        }
+        if (moveInput.x == 1 && moveInput.z == 0)
+        {
+
+            animator.ResetTrigger("WalkLeft");
+            animator.SetTrigger("WalkLeft");
+        }
+        if (moveInput.x > 0 && moveInput.z > 0)
+        {
+
+            animator.ResetTrigger("WalkUpSide");
+            animator.SetTrigger("WalkUpSide");
+        }
+        if (moveInput.x == 0 && moveInput.z == 1)
+        {
+
+            animator.ResetTrigger("WalkDown");
+            animator.SetTrigger("WalkUp");
+        }
+
+
         moveVelocity = moveInput * moveSpeed;
 
         //Rotate with mouse
@@ -82,6 +158,7 @@ public class PlayerController : MonoBehaviour {
             }
             if (Input.GetMouseButtonUp(0))
             {
+
                 theGun.Fire(currentChargingState);
 
                 currentChargingState = -1;
@@ -97,9 +174,10 @@ public class PlayerController : MonoBehaviour {
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             }
 
+
             if (Input.GetKey(KeyCode.Joystick1Button5))
             {
-                if (Time.time > nextChargingTime)
+                /*if (Time.time > nextChargingTime)
                 {
                     nextChargingTime += chargingTime;
 
@@ -111,14 +189,15 @@ public class PlayerController : MonoBehaviour {
                     {
                         currentChargingState += 1;
                     }
-                    Debug.Log("Player 1 charge: " + currentChargingState);
-                }
+                    Debug.Log("STATE: " + currentChargingState);
+                }*/
             }
             if (Input.GetKeyUp(KeyCode.Joystick1Button5))
             {
+
                 theGun.Fire(currentChargingState);
 
-                currentChargingState = -1;
+                //currentChargingState = 0;
             }
 
         }
@@ -128,17 +207,37 @@ public class PlayerController : MonoBehaviour {
             _hp -= 0.01f;
             if (_hp < 0)
             {
-                RemovePlayer();
                 _hp = 0;
+                RemovePlayer();
             }
         }
         _slider.value = _hp;
     }
 
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
+    void FlipAim()
+    {
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
+    private void LateUpdate()
+    {
+        playerSprite.transform.rotation = initRot;
+    }
+
     private void FixedUpdate()
     {
         myRigidBody.velocity += moveVelocity / slipfactor;
-        
+
     }
 
     private void RemovePlayer()

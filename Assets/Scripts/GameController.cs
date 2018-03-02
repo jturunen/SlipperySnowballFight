@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public GameObject canvasGameEnd;
     public GameObject canvasGame;
 
+
     public Text textPlayerWon;
 
     public bool gameOver;
@@ -66,6 +67,13 @@ public class GameController : MonoBehaviour {
             if (playersLeft.Length == 1)
             {
                 string playerName = playersLeft[0].name;
+
+                Debug.Log(playerName + " won!");
+
+                GameEnded(playerName);
+            } else if (playersLeft.Length < 1)
+            {
+                string playerName = "NOBODY";
 
                 Debug.Log(playerName + " won!");
 

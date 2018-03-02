@@ -6,16 +6,17 @@ using UnityEngine.UI;
 
 public class Player2Controller : MonoBehaviour
 {
-
+    Quaternion initRot;
     Slider _slider = null;
-    float _hp = 1.0f;
+    public float _hp = 1.0f;
     public bool _isOutOfArena = false;
 
     public float projectileVelocity;
 
-    private int currentChargingState = -1;
+    private int currentChargingState = 0;
     public float chargingTime;
     public float nextChargingTime;
+    Animator animator;
 
     public float moveSpeed;
     public float slipfactor;
@@ -25,21 +26,26 @@ public class Player2Controller : MonoBehaviour
     private Vector3 moveVelocity;
 
     private Camera mainCamera;
+    public SpriteRenderer playerSprite;
 
     public GunController theGun;
 
     public bool useController;
 
+    private bool facingRight = false;
     // Use this for initialization
     void Start()
     {
         nextChargingTime = chargingTime;
+        initRot = transform.rotation;
 
         //Change player1HP name with the slider names
         _slider = GameObject.Find("player2HP").GetComponent<Slider>();
 
         myRigidBody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
+        animator = playerSprite.GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -48,6 +54,65 @@ public class Player2Controller : MonoBehaviour
 
         moveInput = new Vector3(Input.GetAxisRaw("P2_Horizontal"), 0f, Input.GetAxisRaw("P2_Vertical"));
         moveVelocity = moveInput * moveSpeed;
+
+        if (moveInput.x > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (moveInput.x < 0 && facingRight)
+        {
+            Flip();
+        }
+
+        if (moveInput.x < 0 && moveInput.z > 0)
+        {
+            animator.ResetTrigger("WalkUpSide");
+            animator.SetTrigger("WalkUpSide");
+        }
+        if (moveInput.x == -1 && moveInput.z == 0)
+        {
+
+            animator.ResetTrigger("WalkLeft");
+            animator.SetTrigger("WalkLeft");
+        }
+        if (moveInput.x < 0 && moveInput.z < 0)
+        {
+            Flip();
+
+            animator.ResetTrigger("WalkDownSide");
+            animator.SetTrigger("WalkDownSide");
+        }
+        if (moveInput.x == 0 && moveInput.z == -1)
+        {
+
+            animator.ResetTrigger("WalkUp");
+            animator.SetTrigger("WalkDown");
+        }
+        if (moveInput.x > 0 && moveInput.z < 0)
+        {
+            Flip();
+
+            animator.ResetTrigger("WalkDownSide");
+            animator.SetTrigger("WalkDownSide");
+        }
+        if (moveInput.x == 1 && moveInput.z == 0)
+        {
+
+            animator.ResetTrigger("WalkLeft");
+            animator.SetTrigger("WalkLeft");
+        }
+        if (moveInput.x > 0 && moveInput.z > 0)
+        {
+
+            animator.ResetTrigger("WalkUpSide");
+            animator.SetTrigger("WalkUpSide");
+        }
+        if (moveInput.x == 0 && moveInput.z == 1)
+        {
+
+            animator.ResetTrigger("WalkDown");
+            animator.SetTrigger("WalkUp");
+        }
 
         //Rotate with mouse
         if (!useController)
@@ -67,7 +132,7 @@ public class Player2Controller : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                if (Time.time > nextChargingTime)
+                /*if (Time.time > nextChargingTime)
                 {
                     nextChargingTime += chargingTime;
 
@@ -80,13 +145,13 @@ public class Player2Controller : MonoBehaviour
                         currentChargingState += 1;
                     }
                     Debug.Log("STATE: " + currentChargingState);
-                }
+                }*/
             }
             if (Input.GetMouseButtonUp(0))
             {
                 theGun.Fire(currentChargingState);
 
-                currentChargingState = -1;
+                //currentChargingState = 0;
             }
 
         }
@@ -102,7 +167,7 @@ public class Player2Controller : MonoBehaviour
 
             if (Input.GetButton("P2_Fire1"))
                 {
-                if (Time.time > nextChargingTime)
+                /*if (Time.time > nextChargingTime)
                 {
                     nextChargingTime += chargingTime;
 
@@ -115,13 +180,13 @@ public class Player2Controller : MonoBehaviour
                         currentChargingState += 1;
                     }
                     Debug.Log("Player 2 charge: " + currentChargingState);
-                }
+                }*/
             }
             if (Input.GetButtonUp("P2_Fire1"))
             {
                 theGun.Fire(currentChargingState);
 
-                currentChargingState = -1;
+                //currentChargingState = -1;
             }
 
         }
@@ -143,9 +208,20 @@ public class Player2Controller : MonoBehaviour
         myRigidBody.velocity += moveVelocity / slipfactor;
 
     }
-
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
     private void RemovePlayer()
     {
         gameObject.SetActive(false);
+    }
+
+    private void LateUpdate()
+    {
+        playerSprite.transform.rotation = initRot;
     }
 }

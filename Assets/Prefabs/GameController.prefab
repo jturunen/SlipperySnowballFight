@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersLeft: []
-  canvasGameEnd: {fileID: 1904396359870946, guid: 7f819529248a1b24ca38fb0b6fa213b3,
-    type: 2}
-  textPlayerWon: {fileID: 114597415347897434, guid: 7f819529248a1b24ca38fb0b6fa213b3,
-    type: 2}
+  playersInGame: []
+  canvasGameEnd: {fileID: 0}
+  canvasGame: {fileID: 0}
+  textPlayerWon: {fileID: 0}
   gameOver: 0
