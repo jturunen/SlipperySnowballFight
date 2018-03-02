@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public float projectileVelocity;
 
-    private int currentChargingState = -1;
+    private int currentChargingState = 0;
     public float chargingTime;
     public float nextChargingTime;
 
@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Joystick1Button5))
             {
-                if (Time.time > nextChargingTime)
+                /*if (Time.time > nextChargingTime)
                 {
                     nextChargingTime += chargingTime;
 
@@ -190,14 +190,14 @@ public class PlayerController : MonoBehaviour
                         currentChargingState += 1;
                     }
                     Debug.Log("STATE: " + currentChargingState);
-                }
+                }*/
             }
             if (Input.GetKeyUp(KeyCode.Joystick1Button5))
             {
 
                 theGun.Fire(currentChargingState);
 
-                currentChargingState = 0;
+                //currentChargingState = 0;
             }
 
         }

@@ -13,7 +13,7 @@ public class Player3Controller : MonoBehaviour
 
     public float projectileVelocity;
 
-    private int currentChargingState = -1;
+    private int currentChargingState = 0;
     public float chargingTime;
     public float nextChargingTime;
 
@@ -168,7 +168,7 @@ public class Player3Controller : MonoBehaviour
 
             if (Input.GetButton("P3_Fire1"))
             {
-                if (Time.time > nextChargingTime)
+                /*if (Time.time > nextChargingTime)
                 {
                     nextChargingTime += chargingTime;
 
@@ -181,13 +181,13 @@ public class Player3Controller : MonoBehaviour
                         currentChargingState += 1;
                     }
                     Debug.Log("Player 3 charge: " + currentChargingState);
-                }
+                }*/
             }
             if (Input.GetButtonUp("P3_Fire1"))
             {
                 theGun.Fire(currentChargingState);
 
-                currentChargingState = -1;
+                //currentChargingState = 0;
             }
 
         }

@@ -13,7 +13,7 @@ public class Player2Controller : MonoBehaviour
 
     public float projectileVelocity;
 
-    private int currentChargingState = -1;
+    private int currentChargingState = 0;
     public float chargingTime;
     public float nextChargingTime;
     Animator animator;
@@ -132,7 +132,7 @@ public class Player2Controller : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                if (Time.time > nextChargingTime)
+                /*if (Time.time > nextChargingTime)
                 {
                     nextChargingTime += chargingTime;
 
@@ -145,13 +145,13 @@ public class Player2Controller : MonoBehaviour
                         currentChargingState += 1;
                     }
                     Debug.Log("STATE: " + currentChargingState);
-                }
+                }*/
             }
             if (Input.GetMouseButtonUp(0))
             {
                 theGun.Fire(currentChargingState);
 
-                currentChargingState = 0;
+                //currentChargingState = 0;
             }
 
         }
@@ -167,7 +167,7 @@ public class Player2Controller : MonoBehaviour
 
             if (Input.GetButton("P2_Fire1"))
                 {
-                if (Time.time > nextChargingTime)
+                /*if (Time.time > nextChargingTime)
                 {
                     nextChargingTime += chargingTime;
 
@@ -180,13 +180,13 @@ public class Player2Controller : MonoBehaviour
                         currentChargingState += 1;
                     }
                     Debug.Log("Player 2 charge: " + currentChargingState);
-                }
+                }*/
             }
             if (Input.GetButtonUp("P2_Fire1"))
             {
                 theGun.Fire(currentChargingState);
 
-                currentChargingState = -1;
+                //currentChargingState = -1;
             }
 
         }

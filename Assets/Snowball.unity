@@ -152,20 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 4512259146382514, guid: e034fd6b86365384094c63c81d3dcbdb, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114941308505832202, guid: e034fd6b86365384094c63c81d3dcbdb,
-        type: 2}
-      propertyPath: slipfactor
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 114941308505832202, guid: e034fd6b86365384094c63c81d3dcbdb,
-        type: 2}
-      propertyPath: _hp
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e034fd6b86365384094c63c81d3dcbdb, type: 2}
   m_IsPrefabParent: 0
@@ -488,7 +474,7 @@ Transform:
   m_GameObject: {fileID: 337580066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 17.864353, y: 11.641542, z: 11.641542}
+  m_LocalScale: {x: 48.820107, y: 18.442322, z: 53.122326}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -1086,6 +1072,12 @@ Prefab:
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 468355935}
+    - target: {fileID: 64129011953888070, guid: a7e93bed936ce1f4ea4a4412775e32cb,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: f6031675eecad874da9c898962c28338,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7e93bed936ce1f4ea4a4412775e32cb, type: 2}
   m_IsPrefabParent: 0
@@ -3028,20 +3020,6 @@ Prefab:
     - target: {fileID: 4962126572761514, guid: 6d7536257ae8c5346928e86cea734686, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4226791911663028, guid: 6d7536257ae8c5346928e86cea734686, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114353547727628076, guid: 6d7536257ae8c5346928e86cea734686,
-        type: 2}
-      propertyPath: slipfactor
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 114353547727628076, guid: 6d7536257ae8c5346928e86cea734686,
-        type: 2}
-      propertyPath: _hp
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d7536257ae8c5346928e86cea734686, type: 2}

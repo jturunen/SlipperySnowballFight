@@ -310,7 +310,7 @@ MonoBehaviour:
   chargingTime: 0.3
   nextChargingTime: 0
   moveSpeed: 10
-  slipfactor: 70
+  slipfactor: 150
   theGun: {fileID: 114957442987731872}
   useController: 1
 --- !u!114 &114957442987731872
